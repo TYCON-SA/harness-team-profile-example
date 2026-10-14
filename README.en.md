@@ -11,7 +11,7 @@ The files themselves are commented in Spanish, the main language of the harness;
 
 A small **private** repository of your organization with what the whole team shares: the configuration, where each
 repository lives, and the team's own reviewers and skills. Every machine that installs the harness with `--team`
-downloads it, validates it and stacks it on top of the public harness. When the profile changes, each machine gets the
+downloads it, validates it and stacks it on top of the public harness ([TYCON-SA/tycon-harness](https://github.com/TYCON-SA/tycon-harness), the same for every organization). When the profile changes, each machine gets the
 change on its next update.
 
 ## What this example contains

@@ -9,7 +9,7 @@ organización vea cómo se arma el suyo, lo copie y lo adapte. Ningún nombre de
 
 Es un repo **privado** de tu organización, chico, con lo que comparte todo el equipo: la configuración, dónde vive cada
 repo, y los revisores y skills propios. Cada máquina que instala el arnés con `--team` lo baja, lo valida y lo pone
-encima del arnés público. Cuando el perfil cambia, el cambio le llega a cada máquina en su próxima actualización.
+encima del arnés público ([TYCON-SA/tycon-harness](https://github.com/TYCON-SA/tycon-harness), el mismo para todas las organizaciones). Cuando el perfil cambia, el cambio le llega a cada máquina en su próxima actualización.
 
 ## Qué trae este ejemplo
 
