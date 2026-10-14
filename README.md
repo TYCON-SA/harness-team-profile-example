@@ -78,4 +78,4 @@ dice cuál y por qué.
 ## Probarlo
 
 Con el perfil subido, una instalación con `--team` dice si lo aceptó. En una máquina ya instalada,
-`node scripts/setup/harness.js doctor` muestra el estado del perfil y `harness.js version` de qué commit vino.
+`node scripts/setup/harness.js doctor` dice si el perfil está entero («capa del equipo … todo en su lugar») y `harness.js version --json` (clave `team`) de qué commit vino.

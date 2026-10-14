@@ -81,4 +81,4 @@ installed**, and it says which file and why.
 ## Trying it
 
 With the profile pushed, an install with `--team` says whether it was accepted. On an installed machine,
-`node scripts/setup/harness.js doctor` shows the profile status and `harness.js version` which commit it came from.
+`node scripts/setup/harness.js doctor` says whether the profile is complete (“capa del equipo … todo en su lugar”) and `harness.js version --json` (key `team`) which commit it came from.
