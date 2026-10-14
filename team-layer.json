@@ -2,6 +2,6 @@
   "schema": 1,
   "name": "acme",
   "requires": {
-    "harness": ">= 2026.10.14.12"
+    "harness": ">= 2026.10.14.13"
   }
 }
