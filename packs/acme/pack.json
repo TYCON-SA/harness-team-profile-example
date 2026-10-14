@@ -1,0 +1,24 @@
+{
+  "name": "acme",
+  "description": "Paquete de ejemplo de acme: agrupa los revisores propios del equipo y dice cuándo corre cada uno. El nombre tiene que ser el de la carpeta. Trae un solo revisor, acme-logging-reviewer, que entra cuando un cambio agrega console.log o print( en código de la aplicación.",
+  "guides": [],
+  "reviewers": [
+    {
+      "agent": "acme-logging-reviewer",
+      "group": "condicional",
+      "when": {
+        "any": [
+          { "added": { "pattern": "console\\.(log|debug)\\(", "extensions": [".ts", ".tsx", ".js", ".jsx"] } },
+          { "added": { "pattern": "^\\s*print\\(", "extensions": [".py"] } }
+        ]
+      },
+      "surface": {
+        "paths": ["**/*.ts", "**/*.tsx", "**/*.js", "**/*.jsx", "**/*.py"],
+        "excludePaths": ["**/tests/**", "**/__tests__/**", "**/*.test.ts", "**/*.test.js", "**/node_modules/**", "**/scripts/**"]
+      },
+      "depth": "lean",
+      "prefixes": ["ACMELOG"],
+      "note": "condicional: entra sólo si las líneas agregadas cumplen when. lean: una pasada corta. prefixes: los códigos de regla que cita en sus hallazgos (ACMELOG-C1, ACMELOG-W1)."
+    }
+  ]
+}
