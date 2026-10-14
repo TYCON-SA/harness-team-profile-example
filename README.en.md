@@ -16,21 +16,21 @@ change on its next update.
 
 ## What this example contains
 
-```
-team-layer.json                                         the profile declaration (required)
-perfil-equipo.json                                      the team configuration
-team-repos.json                                         where each harness repository of the organization lives
-packs/acme/pack.json                                    a reviewer pack: when each reviewer runs
-agents/acme-logging-reviewer.md                         a team reviewer
-skills/infrastructure/git-workflow/SKILL.md             a skill: the team's git conventions
-skills/infrastructure/git-workflow/references/*.md      supporting material for the skill
-README.md, README.en.md                                 this page (not installed)
-```
+| File | What it is |
+|---|---|
+| `team-layer.json` | the profile declaration (required) |
+| `team-profile.json` | the team configuration |
+| `team-repos.json` | where each harness repository of the organization lives |
+| `packs/acme/pack.json` | a reviewer pack: when each reviewer runs |
+| `agents/acme-logging-reviewer.md` | a team reviewer |
+| `skills/infrastructure/git-workflow/SKILL.md` | a skill: the team's git conventions |
+| `skills/infrastructure/git-workflow/references/*.md` | supporting material for the skill |
+| `README.md`, `README.en.md` | this page (not installed) |
 
 | File | What it is for |
 |---|---|
 | `team-layer.json` | Declares this repository as a team profile: its name and the minimum harness version that understands it. Only `schema`, `name` and `requires`, no comments. |
-| `perfil-equipo.json` | Which integrations are on, how machines update, which reviewer packs run and how much the harness installs. Team values only: an email, a chat id or a token makes it invalid. |
+| `team-profile.json` | Which integrations are on, how machines update, which reviewer packs run and how much the harness installs. Team values only: an email, a chat id or a token makes it invalid. |
 | `team-repos.json` | Where each repository lives: where machines install from (`public`), this repository (`profile`) and the one for scheduled jobs (`operations`). |
 | `packs/acme/pack.json` | Groups the team's reviewers and says when each one joins the review of a change. |
 | `agents/acme-logging-reviewer.md` | A reviewer: a read-only agent the pipeline runs on a change, with its rule catalog. |
@@ -39,20 +39,25 @@ README.md, README.en.md                                 this page (not installed
 Every file carries a short comment: in the `.json` files, the `__doc` key (keys starting with `__` are comments); in
 the `.md` files, an HTML comment; in `pack.json`, its `description` and the reviewer's `note`.
 
+The profile used to be called `perfil-equipo.json`: the harness still accepts that name, with a one-line notice that
+says how to rename it. If you rename yours, raise `requires.harness` in `team-layer.json` to the version this
+repository asks for, in the same commit: a machine with an older harness does not know the new name and would reject
+the whole profile.
+
 ## How to copy and adapt it
 
 1. **Create a private repository** in your organization, on GitHub or Azure DevOps, visible only to your team. For
    example `harness-team-profile`.
 2. **Copy these files** into it.
 3. **Replace `acme` with your organization's name** in `team-layer.json` (`name`), `team-repos.json` and
-   `perfil-equipo.json` (`ado.org`, if you use Azure DevOps; otherwise delete that block).
+   `team-profile.json` (`ado.org`, if you use Azure DevOps; otherwise delete that block).
 4. **Fill in `team-repos.json`** with your real repositories. On GitHub: `{ "platform": "github", "org", "repo" }`; on
    Azure DevOps: `{ "platform": "azure", "org", "project", "repo" }`. You can also edit it with the
    `harness.js team-config` page, which validates what you type.
-5. **Choose the configuration** in `perfil-equipo.json`. Start with `install.profile: minimal` and `update.apply: ask`.
+5. **Choose the configuration** in `team-profile.json`. Start with `install.profile: minimal` and `update.apply: ask`.
 6. **Keep what you need.** The reviewer, the pack and the skill are examples: rename them with your own prefix (if you
    rename a file or folder, change its `name:` too) or delete them. A profile can hold just `team-layer.json`,
-   `perfil-equipo.json` and `team-repos.json`.
+   `team-profile.json` and `team-repos.json`.
 7. **Install with the profile**, from the public harness:
 
    ```bash
@@ -68,7 +73,7 @@ the `.md` files, an HTML comment; in `pack.json`, its `description` and the revi
 The harness checks the whole profile before installing it. **If a single file fails, nothing from the profile is
 installed**, and it says which file and why.
 
-- **Allowed paths:** `perfil-equipo.json`, `team-repos.json`, `packs/<pack>/pack.json`, `agents/<name>.md`, the `.md`
+- **Allowed paths:** `team-profile.json`, `team-repos.json`, `packs/<pack>/pack.json`, `agents/<name>.md`, the `.md`
   files of a skill under `skills/` (with its `SKILL.md`, up to three folders below `skills/`) and the `.md` files at the
   root of `onboarding/` (the text a new developer pastes to the assistant). The root may also hold `README*`,
   `LICENSE*` and `.gitignore`, which are not installed.
